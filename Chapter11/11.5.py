@@ -9,7 +9,7 @@ h1 = np.kron(f, e)
 h2 = np.kron(g,k)
 
 inner_product_h1_h2 = np.vdot(h1,h2)
-inner_product_term2 = np.vdot(f ,e) + np.vdot(g,k)
+inner_product_term2 = np.vdot(f ,g) * np.vdot(e,k)
 print(inner_product_term2 == inner_product_h1_h2)
 print(inner_product_h1_h2)
 print(inner_product_term2)
