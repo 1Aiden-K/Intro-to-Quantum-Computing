@@ -1,5 +1,7 @@
 #Creating 2 qubit circuit where a NOT gate is applied to MSB then a CNOT is applied to the two with the MSB being the control qubit
 from qiskit import QuantumCircuit
+from qiskit.visualization import circuit_drawer
+from matplotlib import pyplot as plt
 
 #initiate a 2-qubit circuit
 qc = QuantumCircuit(2)
@@ -11,4 +13,5 @@ qc.x(1)
 qc.cx(1,0)
 
 #draw the circuit
-print(qc.draw())
+circuit_drawer(qc, output="mpl", style={"backgroundcolor": "#EEEEEE"})
+plt.show()
