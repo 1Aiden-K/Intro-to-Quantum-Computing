@@ -1,5 +1,5 @@
 #quantum teleportation protocol
-from Algorithms.utils import create_bell_pair, bell_measurement, pauli_correction
+from quantum_utils import create_bell_pair, bell_measurement, pauli_correction
 from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
 from qiskit.visualization import circuit_drawer
 from matplotlib import pyplot as plt

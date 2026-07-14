@@ -1,7 +1,7 @@
 ## These are my exercises and algorithms from Hiu Yung Wong's Introduction to Quantum Computing
 ### Notes and problem sets are in the "Chapters" folder, Algorithms and protocols can be found in the "Algorithms" folder.
 
-Algorithms mainly use qiskit, but matrix/tensor operations with numpy are also present throughout many excercises.
+Algorithms mainly use qiskit, but matrix/tensor operations with numpy are also present throughout many excercises. You can find a protocol library in quantum_utils.py.
 
 ---
 
@@ -16,6 +16,6 @@ Algorithms mainly use qiskit, but matrix/tensor operations with numpy are also p
 - **Quantum Teleportation**
   <details>
     <summary>See circuit diagram</summary>
-    
+
     ![](Algorithms/Circuit-Diagrams/quantumTeleportation.png)
   </details>

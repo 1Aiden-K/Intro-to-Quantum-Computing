@@ -16,6 +16,5 @@ dependencies = [
     "qiskit-aer>=0.17.2",
 ]
 
-[tool.setuptools.packages.find]
-include = ["Algorithms*"]
-exclude = ["Chapters*"]
+[tool.setuptools]
+py-modules = ["quantum_utils"]
