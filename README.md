@@ -1,6 +1,8 @@
-## These are my exercises from Hiu Yung Wong's Introduction to Quantum Computing
-### If I ever make something semi-relevant, I'll provide the file locale and description
+## These are my exercises and algorithms from Hiu Yung Wong's Introduction to Quantum Computing
+### Notes and problem sets are in the "Chapters" folder, Algorithms can be found in the "Algorithms" folder.
 
+Algorithms mainly use qiskit, but matrix/tensor operations with numpy are also present throughout many excercises.
 
+---
 
-I'm not uploading notes here, I took them on paper
+#### List of Completed Algoriths

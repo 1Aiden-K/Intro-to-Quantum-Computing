@@ -7,15 +7,18 @@ from qiskit_aer import AerSimulator
 qc = QuantumCircuit(2,2)
 
 qc.cx(1,0)
-qc.h(1)
 
+qc.barrier()
+
+qc.h(1)
 qc.measure(1,1)
 
+qc.barrier()
 qc.z(0)
 qc.measure(0,0)
 
 #draw the circuit
-circuit_drawer(qc, output="mpl", style={"backgroundcolor": "#EEEEEE"})
+circuit_drawer(qc, output="mpl", style={"backgroundcolor": "#EEEEEE"}, plot_barriers=True)
 plt.show()
 
 #simulate
