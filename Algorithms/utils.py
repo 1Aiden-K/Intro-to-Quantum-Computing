@@ -14,7 +14,7 @@ def bell_measurement(qc: QuantumCircuit,
                      q0: Qubit, q1: Qubit,
                      c0: Clbit, c1: Clbit):
     """
-    Perform a Bell-basis measurement on q0 and q1.
+    Perform a Bell-basis measurement on q0 and q1 with q0 as control and q1 as target.
     Stores the results in c0 and c1 respectively.
     """
     qc.cx(q0, q1)
@@ -34,3 +34,14 @@ def pauli_correction(qc: QuantumCircuit,
     with qc.if_test((c0, 1)):
         qc.z(target)
     qc.barrier()
+
+def teleport(qc: QuantumCircuit,
+            alice: Qubit, ancillary: Qubit, bob: Qubit, 
+            c0: Clbit, c1: Clbit):
+    """
+    Teleports Alice's state to Bob, collapsing Alice in the process.
+    Assumes:
+        Bob and ancillary are entangled
+    """
+    bell_measurement(qc, alice, ancillary, c0, c1)
+    pauli_correction(qc, bob, c0, c1)
