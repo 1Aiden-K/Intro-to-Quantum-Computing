@@ -8,7 +8,6 @@ def create_bell_pair(qc: QuantumCircuit,
     """
     qc.h(q0)
     qc.cx(q0, q1)
-    qc.barrier()
 
 def bell_measurement(qc: QuantumCircuit,
                      q0: Qubit, q1: Qubit,
@@ -21,7 +20,6 @@ def bell_measurement(qc: QuantumCircuit,
     qc.measure(q1, c1)
     qc.h(q0)
     qc.measure(q0, c0)
-    qc.barrier()
 
 def pauli_correction(qc: QuantumCircuit,
                      target: Qubit,
@@ -33,7 +31,15 @@ def pauli_correction(qc: QuantumCircuit,
         qc.x(target)
     with qc.if_test((c0, 1)):
         qc.z(target)
-    qc.barrier()
+
+def measure_x(qc: QuantumCircuit,
+                     q0: Qubit, 
+                     c0: Clbit):
+    """
+    Measures |+>/|-> as |0>/|1> (i.e. sigma_x)
+    """
+    qc.h(q0)
+    qc.measure(q0, c0)
 
 def teleport(qc: QuantumCircuit,
             alice: Qubit, ancillary: Qubit, bob: Qubit, 
@@ -42,6 +48,18 @@ def teleport(qc: QuantumCircuit,
     Teleports Alice's state to Bob, collapsing Alice in the process.
     Assumes:
         Bob and ancillary are entangled
+    """
+    bell_measurement(qc, alice, ancillary, c0, c1)
+    pauli_correction(qc, bob, c0, c1)
+
+def entanglement_swap(qc: QuantumCircuit,
+    alice: Qubit, ancillary: Qubit, bob: Qubit,
+    c0: Clbit, c1: Clbit):
+    """
+    Swaps entanglement from Carlos and Alice to Carlos and Bob.
+    Assumes:
+        Carlos and Alice are entangled,
+        Bob and ancillary are entangled,
     """
     bell_measurement(qc, alice, ancillary, c0, c1)
     pauli_correction(qc, bob, c0, c1)

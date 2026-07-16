@@ -5,7 +5,7 @@ from qiskit.visualization import circuit_drawer
 from matplotlib import pyplot as plt
 from qiskit.circuit import Qubit, Clbit
 
-def teleport(qc: QuantumCircuit,
+def teleport_demo(qc: QuantumCircuit,
             alice: Qubit, ancillary: Qubit, bob: Qubit, 
             c0: Clbit, c1: Clbit):
     """
@@ -14,6 +14,7 @@ def teleport(qc: QuantumCircuit,
         Bob and ancillary are entangled
     """
     bell_measurement(qc, alice, ancillary, c0, c1)
+    qc.barrier()
     pauli_correction(qc, bob, c0, c1)
 
     
@@ -30,8 +31,10 @@ if __name__ == "__main__":
 
     #demo entanglement
     create_bell_pair(qc, ancillary, bob)
+    qc.barrier()
 
-    teleport(qc, alice, ancillary, bob, cr[1], cr[2])
+    teleport_demo(qc, alice, ancillary, bob, cr[1], cr[2])
+    qc.barrier()
 
     qc.measure(bob, cr[0])
     

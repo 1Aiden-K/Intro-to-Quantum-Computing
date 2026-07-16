@@ -5,7 +5,8 @@ from qiskit.visualization import circuit_drawer
 from matplotlib import pyplot as plt
 from qiskit.circuit import Qubit, Clbit
 
-def entanglement_swap(qc: QuantumCircuit,
+#demo version
+def entanglement_swap_demo(qc: QuantumCircuit,
     alice: Qubit, ancillary: Qubit, bob: Qubit,
     c0: Clbit, c1: Clbit):
     """
@@ -15,6 +16,7 @@ def entanglement_swap(qc: QuantumCircuit,
         Bob and ancillary are entangled,
     """
     bell_measurement(qc, alice, ancillary, c0, c1)
+    qc.barrier()
     pauli_correction(qc, bob, c0, c1)
 
 #demo
@@ -33,11 +35,15 @@ if __name__ == "__main__":
 
     #demo entanglements
     create_bell_pair(qc, carlos, alice)
+    qc.barrier()
     create_bell_pair(qc, ancillary, bob)
+    qc.barrier()
 
-    entanglement_swap(qc, alice, ancillary, bob, cr[1], cr[2])
+    entanglement_swap_demo(qc, alice, ancillary, bob, cr[1], cr[2])
+    qc.barrier()
 
-    qc.measure(bob, cr[0]), qc.measure(carlos, cr[3])
+    qc.measure(bob, cr[0])
+    qc.measure(carlos, cr[3])
 
     #draw the circuit
     circuit_drawer(qc, output="mpl", style={"backgroundcolor": "#EEEEEE"}, plot_barriers=True)
