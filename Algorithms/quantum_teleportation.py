@@ -1,5 +1,5 @@
 #quantum teleportation protocol
-from quantum_utils import create_bell_pair, bell_measurement, pauli_correction
+from quantum_utils import create_bell_pair, measure_bell_basis, pauli_correction
 from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
 from qiskit.visualization import circuit_drawer
 from matplotlib import pyplot as plt
@@ -13,7 +13,7 @@ def teleport_demo(qc: QuantumCircuit,
     Assumes:
         Bob and ancillary are entangled
     """
-    bell_measurement(qc, alice, ancillary, c0, c1)
+    measure_bell_basis(qc, alice, ancillary, c0, c1)
     qc.barrier()
     pauli_correction(qc, bob, c0, c1)
 

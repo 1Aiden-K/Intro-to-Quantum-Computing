@@ -1,5 +1,6 @@
 from qiskit import QuantumCircuit
 from qiskit.circuit import Qubit, Clbit
+from collections.abc import Iterable
 
 def create_bell_pair(qc: QuantumCircuit, 
                      q0: Qubit, q1: Qubit):
@@ -9,7 +10,7 @@ def create_bell_pair(qc: QuantumCircuit,
     qc.h(q0)
     qc.cx(q0, q1)
 
-def bell_measurement(qc: QuantumCircuit,
+def measure_bell_basis(qc: QuantumCircuit,
                      q0: Qubit, q1: Qubit,
                      c0: Clbit, c1: Clbit):
     """
@@ -41,6 +42,18 @@ def measure_x(qc: QuantumCircuit,
     qc.h(q0)
     qc.measure(q0, c0)
 
+def create_superposition(qc: QuantumCircuit,
+                            qubits: Iterable[int]):
+    """Applies a Hadamard gate to each qubit."""
+    qc.h(qubits)
+
+def apply_controlled_z(qc: QuantumCircuit, 
+                       q0: Qubit, q1: Qubit):
+    """Applies a controlled z gate to q0 and q1 with q0 as control and q1 as target"""
+    qc.h(q1)
+    qc.cx(q0, q1)
+    qc.h(q1)
+
 def teleport(qc: QuantumCircuit,
             alice: Qubit, ancillary: Qubit, bob: Qubit, 
             c0: Clbit, c1: Clbit):
@@ -49,7 +62,7 @@ def teleport(qc: QuantumCircuit,
     Assumes:
         Bob and ancillary are entangled
     """
-    bell_measurement(qc, alice, ancillary, c0, c1)
+    measure_bell_basis(qc, alice, ancillary, c0, c1)
     pauli_correction(qc, bob, c0, c1)
 
 def entanglement_swap(qc: QuantumCircuit,
@@ -61,5 +74,5 @@ def entanglement_swap(qc: QuantumCircuit,
         Carlos and Alice are entangled,
         Bob and ancillary are entangled,
     """
-    bell_measurement(qc, alice, ancillary, c0, c1)
+    measure_bell_basis(qc, alice, ancillary, c0, c1)
     pauli_correction(qc, bob, c0, c1)
