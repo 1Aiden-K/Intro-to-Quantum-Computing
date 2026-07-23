@@ -1,14 +1,12 @@
-#entanglement swapping protocol
 from quantum_utils import measure_x
 from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
 from qiskit.visualization import circuit_drawer
 from matplotlib import pyplot as plt
 from qiskit.circuit import Qubit, Clbit, Gate
 
-uf = Gate(name="uf", num_qubits=2, params=[], label="Uf")
-
 def deutsch_algorithm_demo(qc: QuantumCircuit,
     q0: Qubit, q1: Qubit,
+    oracle: Gate,
     c0: Clbit):
     """
     Creates Deutsch algorithm Ciruit. 
@@ -20,7 +18,7 @@ def deutsch_algorithm_demo(qc: QuantumCircuit,
     qc.barrier()
 
     #this would be some quantum oracle
-    qc.append(uf, [q0, q1])
+    qc.append(oracle, [q0, q1])
     qc.barrier()
 
     measure_x(qc, q1, c0)
@@ -28,6 +26,7 @@ def deutsch_algorithm_demo(qc: QuantumCircuit,
 
 #demo
 if __name__ == "__main__": 
+    oracle = Gate(name="oracle", num_qubits=2, params=[], label="Uf")
     #qubit
     qr = QuantumRegister(2, "q")
     #for storing collapsed states of individual qubits, initializes to 0000
@@ -37,7 +36,7 @@ if __name__ == "__main__":
     qc = QuantumCircuit(qr,
                         cr)
 
-    deutsch_algorithm_demo(qc, qr[0], qr[1], cr[1])
+    deutsch_algorithm_demo(qc, qr[0], qr[1], oracle, cr[1])
 
 
     #draw the circuit

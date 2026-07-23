@@ -42,14 +42,14 @@ def measure_x(qc: QuantumCircuit,
     qc.h(q0)
     qc.measure(q0, c0)
 
-def create_superposition(qc: QuantumCircuit,
+def h_all(qc: QuantumCircuit,
                             qubits: Iterable[int]):
     """Applies a Hadamard gate to each qubit."""
     qc.h(qubits)
 
-def apply_controlled_z(qc: QuantumCircuit, 
+def controlled_z(qc: QuantumCircuit, 
                        q0: Qubit, q1: Qubit):
-    """Applies a controlled z gate to q0 and q1 with q0 as control and q1 as target"""
+    """Applies a controlled z gate with q0 as control and q1 as target"""
     qc.h(q1)
     qc.cx(q0, q1)
     qc.h(q1)
@@ -76,3 +76,15 @@ def entanglement_swap(qc: QuantumCircuit,
     """
     measure_bell_basis(qc, alice, ancillary, c0, c1)
     pauli_correction(qc, bob, c0, c1)
+
+def grover_mixer(qc: QuantumCircuit,
+                 q0: Qubit, q1: Qubit):
+    """
+    Applies Grover's diffusion operator with q0 as control and q1 as target
+    """
+    h_all(qc, q0, q1)
+    qc.z(q0)
+    qc.z(q1)
+    controlled_z(qc, q0, q1)
+    h_all(qc, q0, q1)
+
