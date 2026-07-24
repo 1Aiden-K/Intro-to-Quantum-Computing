@@ -7,6 +7,12 @@ Algorithms mainly use qiskit with little endian convention, but matrix/tensor op
 
 #### List of Completed Algoriths/Protocols
 (sorted most recent -> oldest)
+- **Grover's Algorithm**
+  <details>
+    <summary>See circuit diagram</summary>
+
+    ![](Algorithms/Circuit-Diagrams/groversAlgorithm.png)
+  </details>
 - **Duetsch Algorithm**
   <details>
     <summary>See circuit diagram</summary>

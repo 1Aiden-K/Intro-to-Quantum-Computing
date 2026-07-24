@@ -53,6 +53,7 @@ def controlled_z(qc: QuantumCircuit,
     qc.h(q1)
     qc.cx(q0, q1)
     qc.h(q1)
+    qc.id(q0)
 
 def teleport(qc: QuantumCircuit,
             alice: Qubit, ancillary: Qubit, bob: Qubit, 
@@ -82,9 +83,9 @@ def grover_mixer(qc: QuantumCircuit,
     """
     Applies Grover's diffusion operator with q0 as control and q1 as target
     """
-    h_all(qc, q0, q1)
+    h_all(qc, [q0, q1])
     qc.z(q0)
     qc.z(q1)
     controlled_z(qc, q0, q1)
-    h_all(qc, q0, q1)
+    h_all(qc, [q0, q1])
 
